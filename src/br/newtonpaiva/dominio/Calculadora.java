@@ -12,13 +12,15 @@ public class Calculadora extends JFrame {
     public JPanel painel;
     public JTextField visor;
     public double leitura, memoria;
+
+    public String numeroN;
     public String operador;
 
     public void calculadora() {
         janela = new JFrame("Calculadora");
         janela.setSize(400, 400);
 
-        visor = new JTextField(16);
+        visor = new JTextField("");
         visor.setEditable(false);
 
         JButton b0 = new JButton("0");
@@ -163,7 +165,7 @@ public class Calculadora extends JFrame {
                 operador = "/";
                 memoria += leitura;
                 leitura = 0;
-                visor.setText("");
+                visor.setText(visor.getText() + bDiv.getText());
             }
         });
 
@@ -180,10 +182,17 @@ public class Calculadora extends JFrame {
         bSub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                operador = "-";
-                memoria += leitura;
-                leitura = 0;
-                visor.setText("");
+                if (visor.getText() == "") {
+                    operador = "-";
+                    memoria = leitura - leitura * 2;
+                    visor.setText(visor.getText() + bSub.getText());
+                }
+                else {
+                    operador = "-";
+                    memoria += leitura;
+                    leitura = 0;
+                    visor.setText(visor.getText() + bSub.getText());
+                }
             }
         });
 
@@ -193,7 +202,7 @@ public class Calculadora extends JFrame {
                 operador = "+";
                 memoria += leitura;
                 leitura = 0;
-                visor.setText("");
+                visor.setText(visor.getText() + bAd.getText());
             }
         });
 
@@ -209,7 +218,7 @@ public class Calculadora extends JFrame {
                 if (operador == "/")
                     memoria /= leitura;
                 leitura = 0;
-                visor.setText(""+ memoria);
+                visor.setText(""+ -memoria);
             }
         });
 
