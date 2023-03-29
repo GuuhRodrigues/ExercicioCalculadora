@@ -7,13 +7,10 @@ import java.awt.event.ActionListener;
 
 public class Calculadora extends JFrame {
 
-    public JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, bDiv, bMult, bSub, bAd, bIgual, bLimpar;
     public JFrame janela;
     public JPanel painel;
     public JTextField visor;
     public double leitura, memoria;
-
-    public String numeroN;
     public String operador;
 
     public void calculadora() {
@@ -185,14 +182,13 @@ public class Calculadora extends JFrame {
                 if (visor.getText() == "") {
                     operador = "-";
                     memoria = leitura - leitura * 2;
-                    visor.setText(visor.getText() + bSub.getText());
+                    visor.setText("");
                 }
-                else {
-                    operador = "-";
-                    memoria += leitura;
-                    leitura = 0;
-                    visor.setText(visor.getText() + bSub.getText());
-                }
+                operador = "-";
+                memoria -= leitura;
+                leitura = 0;
+                visor.setText("");
+
             }
         });
 
@@ -218,7 +214,7 @@ public class Calculadora extends JFrame {
                 if (operador == "/")
                     memoria /= leitura;
                 leitura = 0;
-                visor.setText(""+ -memoria);
+                visor.setText(""+ memoria);
             }
         });
 
